@@ -43,7 +43,7 @@ export const useGetStudentDetails = (studentId: string) => {
         queryKey: ["studentDetails", studentId],
         queryFn: async () => {
             const token = (await localStorage.getItem("wintriceTeacherToken")) || "";
-            return get_requests(`school/students/${studentId}`, token);
+            return get_requests(`teacher/students/${studentId}`, token);
         },
         enabled: !!studentId,
     });
@@ -76,35 +76,17 @@ export const useGetTeacherCourses = () => {
 };
 
 
-export const useGetSchoolQuiz = () => {
+export const useGetTeacherQuizzes = () => {
     const { data, isLoading, isError, isFetched, refetch } = useQuery({
-        queryKey: ["schoolQuiz"],
+        queryKey: ["teacherQuizzes"],
         queryFn: async () => {
             const token = (await localStorage.getItem("wintriceTeacherToken")) || "";
-            return get_requests("school/quizzes", token);
+            return get_requests("teacher/quizzes", token);
         },
     });
 
     return {
-        schoolQuizData: data,
-        isLoading,
-        isError,
-        isFetched,
-        refetch,
-    };
-};
-
-export const useGetSchoolQuizChart = () => {
-    const { data, isLoading, isError, isFetched, refetch } = useQuery({
-        queryKey: ["schoolQuizChart"],
-        queryFn: async () => {
-            const token = (await localStorage.getItem("wintriceTeacherToken")) || "";
-            return get_requests("school/quiz-chart", token);
-        },
-    });
-
-    return {
-        schoolQuizChartData: data,
+        teacherQuizData: data,
         isLoading,
         isError,
         isFetched,
@@ -113,24 +95,24 @@ export const useGetSchoolQuizChart = () => {
 };
 
 
-
-export const useGetSchoolProfile = () => {
+export const useGetTeacherProfile = () => {
     const { data, isLoading, isError, isFetched, refetch } = useQuery({
-        queryKey: ["schoolProfile"],
+        queryKey: ["teacherProfile"],
         queryFn: async () => {
             const token = (await localStorage.getItem("wintriceTeacherToken")) || "";
-            return get_requests("school/profile", token);
+            return get_requests("teacher/settings", token);
         },
     });
 
     return {
-        schoolProfile: data,
+        teacherProfiile: data,
         isLoading,
         isError,
         isFetched,
         refetch,
     };
 };
+
 
 
 // ============= SCHOOL TEACHERS ENDPOINT GET ================

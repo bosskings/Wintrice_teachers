@@ -100,7 +100,7 @@ const Overview = () => {
 
   const { teacherStudentsData, isLoading: isStudentLoading, refetch: refetchStudents } = useGetTeachersStudents()
   const studentList = teacherStudentsData?.data?.students || []
-  console.log('This is teachersData', studentList)
+  console.log('This is teachersData', teachersData)
 
 
   // Filter students based on search query
@@ -113,8 +113,11 @@ const Overview = () => {
     )
   })
 
-  const gradeData = teachersData?.studentGrowth
-  // console.log('Overview data:', gradeData)
+  const growthVsTime = teachersData?.students?.growthVsTime ?? {}
+  const gradeData = Object.entries(growthVsTime).map(([month, students]) => ({
+    week: new Date(month + '-01').toLocaleString('default', { month: 'short' }),
+    students,
+  }))
 
   const { mutate: createSchoolStudent, isPending: isCreatingSchoolStudent } = useCreateSchoolStudent()
 
@@ -281,7 +284,6 @@ const Overview = () => {
                 <th className="text-left py-3 px-4 text-gray-600 font-medium text-sm">Student</th>
                 <th className="text-left py-3 px-4 text-gray-600 font-medium text-sm">Email</th>
                 <th className="text-left py-3 px-4 text-gray-600 font-medium text-sm">Grade</th>
-                <th className="text-left py-3 px-4 text-gray-600 font-medium text-sm">DOB</th>
                 <th className="text-left py-3 px-4 text-gray-600 font-medium text-sm">Status</th>
               </tr>
             </thead>
@@ -320,7 +322,6 @@ const Overview = () => {
                       {student.email}
                     </td>
                     <td className="py-4 px-4 text-gray-600 text-sm">Grade: {student.grade}</td>
-                    <td className="py-4 px-4 text-gray-500 text-sm">{new Date(student.dob).toLocaleDateString('en-GB')}</td>
                     <td className="p-2 text-gray-500 text-[10px]">
                       <button className={`bg-gray-100 rounded-3xl p-2 px-4 ${student.status === 'ACTIVE' ? 'bg-green-100 text-green-700' : ''}`}>{student.status}</button>
                     </td>

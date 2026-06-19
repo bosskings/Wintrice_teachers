@@ -5,7 +5,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import { SolidBlueBtn, SolidGrayBtn } from '../component/Btns'
 import LoadingOverlay from '../component/LoadingOverlay'
 import { useCreateSchoolStudent } from '../hooks/mutation/allMutattion'
-import { useGetSchoolStudents } from '../hooks/queries/allQueries'
+import { useGetTeachersStudents } from '../hooks/queries/allQueries'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface StudentFormData {
@@ -90,8 +90,8 @@ const Students = () => {
   const navigate = useNavigate()
 
 
-  const { schoolStudentsData, isLoading: isStudentLoading, refetch: refetchStudents } = useGetSchoolStudents()
-  const studentList = schoolStudentsData?.data?.students || []
+  const { teacherStudentsData, isLoading: isStudentLoading, refetch: refetchStudents } = useGetTeachersStudents()
+  const studentList = teacherStudentsData?.data?.students || []
 
   // ─── Mutation ───────────────────────────────────────────────────────────────
   const { mutate: createSchoolStudent, isPending: isCreatingSchoolStudent } = useCreateSchoolStudent()

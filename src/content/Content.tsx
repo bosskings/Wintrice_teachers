@@ -1,8 +1,11 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
+import Courses from '../pages/Courses'
 import Overview from '../pages/Overview'
+import Password from '../pages/Password'
+import Quizzess from '../pages/Quizzess'
 import Settings from '../pages/Settings'
 import StudentDetail from '../pages/StudentDetails'
-import Teachers from '../pages/Teachers'
+import Students from '../pages/Students'
 
 const Content = () => {
   return (
@@ -10,9 +13,12 @@ const Content = () => {
       <Routes>
         <Route path='/' element={<Navigate to={'/overview'} />} />
         <Route path='/overview' element={<Overview />} />
-        <Route path='/teachers' element={<Teachers />} />
+        <Route path='/students' element={<Students />} />
+        <Route path='/courses' element={<Courses />} />
+        <Route path='/quizzes' element={<Quizzess />} />
         <Route path='/student/:id' element={<StudentDetail />} />
-        <Route path='/settings' element={<Settings />} />
+        <Route path='/profile' element={<Settings />} />
+        <Route path='/password' element={<Password />} />
       </Routes>
 
     </div>

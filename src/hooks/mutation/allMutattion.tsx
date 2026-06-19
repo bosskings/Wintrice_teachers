@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { post_requests, put_request_with_image, put_requests } from "../helper/AxioHelper";
+import { post_requests, put_requests } from "../helper/AxioHelper";
 
 
 
@@ -33,20 +33,38 @@ export const useCreateSchoolStudent = () => {
     return createSchoolStudent
 }
 
-export const useUpdateSchoolProfile = () => {
+export const useUpdateTeacherProfile = () => {
     const queryClient = useQueryClient()
-    const updateSchoolProfile = useMutation({
+    const updateTeachersProfile = useMutation({
         mutationFn: async (data: any) => {
             const token = (await localStorage.getItem("wintriceTeacherToken")) || ""
-            return put_request_with_image(`school/profile`, data, token)
+            return put_requests(`teacher/settings`, data, token)
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["schoolProfile"] })
+            queryClient.invalidateQueries({ queryKey: ["teachersProfile"] })
         },
     })
 
-    return updateSchoolProfile
+    return updateTeachersProfile
 }
+
+
+export const useUpdateTeachersPassword = () => {
+    const queryClient = useQueryClient()
+    const updateTeachersPassword = useMutation({
+        mutationFn: async (data: any) => {
+            const token = (await localStorage.getItem("wintriceTeacherToken")) || ""
+            return put_requests(`teacher/settings/password`, data, token)
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["teacherPassword"] })
+        },
+    })
+
+    return updateTeachersPassword
+}
+
+
 
 
 

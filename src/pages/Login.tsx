@@ -18,7 +18,9 @@ const Login = () => {
         login({ email, password }, {
             onSuccess: (res) => {
                 const token = res.data.token
+                console.log('Users', res.data)
                 localStorage.setItem('wintriceTeacherToken', token);
+                localStorage.setItem('teacher', JSON.stringify(res.data.teacher))
                 toast.success('Login successful')
                 setTimeout(() => navigate('/overview'), 1500)
             },
