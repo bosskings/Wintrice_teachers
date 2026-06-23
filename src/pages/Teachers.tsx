@@ -1,7 +1,6 @@
 import { AlertCircle, Ban, BookOpen, Mail, X } from 'lucide-react'
 import { useState } from 'react'
 import { IoSearch } from 'react-icons/io5'
-import { useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
 import { SolidBlueBtn, SolidGrayBtn } from '../component/Btns'
 import LoadingOverlay from '../component/LoadingOverlay'
@@ -80,7 +79,6 @@ const parseApiErrors = (error: any): string[] => {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 const Teachers = () => {
-    const navigate = useNavigate()
 
     const { schoolTeachers, isLoading: isTeacherLoading, refetch: refetchTeachers } = useGetSchoolTeachers()
     const teacherList = schoolTeachers?.data?.teachers || []
